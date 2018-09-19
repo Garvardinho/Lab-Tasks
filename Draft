@@ -47,13 +47,9 @@ void processLine( char buffer[] )
 						bufferPtr++;
 				}
 
-				while ( *bufferPtr != '\0' ) // удаление
-				{
-						*(bufferPtr - ctrOfLetters) = *bufferPtr;
-						bufferPtr++;
-				}
+				while ( *(bufferPtr - ctrOfLetters) = *bufferPtr++ ) // удаление
 
-				*bufferPtr = '\0';
+				*(bufferPtr - ctrOfLetters) = '\0';
 				bufferPtr = wordPtr;
 				found = NO;
 		}
