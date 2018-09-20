@@ -1,0 +1,67 @@
+// В символьной строке удалить слово, стоящее после запятой
+
+#include <stdio.h>
+
+#define		NO		 0
+#define		YES		 1
+#define		DELETE 2
+
+void processLine( char buffer[] );
+
+int main(void)
+{
+	char line[1000];
+
+	gets(line);
+	processLine(line);
+	puts(line);
+	getchar();
+	return 0;
+}
+
+void processLine( char buffer[] )
+{
+	char *bufferPtr;
+	char *startOfWord;
+	char *endOfWord;
+	int flag;
+	int found;
+
+	flag = NO;
+	found = NO;
+	bufferPtr = buffer;
+	startOfWord = buffer;
+	endOfWord = buffer;
+	
+	do
+	{
+		if ( *bufferPtr == ' ' || *bufferPtr == ',' || *bufferPtr == '.' || *bufferPtr == '\n' || *bufferPtr == '\0' )
+		{
+			if ( found == DELETE )
+			{
+				endOfWord = bufferPtr;
+				while ( *startOfWord++ = *endOfWord++ ) // удаление слова
+				{}
+				found = NO;
+			}
+			else 
+			{
+				if ( *bufferPtr == ',' ) 
+					found = YES;
+			}
+			
+			flag = NO;
+		}
+		else 
+		{
+			if ( !flag  && found )
+			{
+				startOfWord = bufferPtr;
+				found = DELETE;
+			}
+			
+			flag = YES;
+		}
+		bufferPtr++;
+	} while ( *bufferPtr != '\0' );
+}
