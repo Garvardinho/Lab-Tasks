@@ -1,26 +1,15 @@
-// В символьной строке удалить слово, стоящее после запятой
-
 #include <stdio.h>
 
 #define		NO		 0
 #define		YES		 1
 #define		DELETE 2
 
-void processLine( char buffer[] );
-
 int main(void)
 {
 	char line[1000];
 
-	gets(line);
-	processLine(line);
-	puts(line);
-	getchar();
-	return 0;
-}
+	fgets(line, sizeof line, stdin); // use 'fgets' instead of 'gets'
 
-void processLine( char buffer[] )
-{
 	char *bufferPtr;
 	char *startOfWord;
 	char *endOfWord;
@@ -29,32 +18,33 @@ void processLine( char buffer[] )
 
 	flag = NO;
 	found = NO;
-	bufferPtr = buffer;
-	startOfWord = buffer;
-	endOfWord = buffer;
+	bufferPtr = line - 1; // set this value because of the increment in the beginning of the cycle
+	startOfWord = bufferPtr;
+	endOfWord = bufferPtr;
 	
 	do
 	{
-		if ( *bufferPtr == ' ' || *bufferPtr == ',' || *bufferPtr == '.' || *bufferPtr == '\n' || *bufferPtr == '\0' )
+		bufferPtr++;
+		if ( *bufferPtr == ' ' || *bufferPtr == ',' || *bufferPtr == '.' 
+		 || *bufferPtr == '\n' || *bufferPtr == '\0' ) // check for separator
 		{
 			if ( found == DELETE )
 			{
-				endOfWord = bufferPtr;
-				while ( *startOfWord++ = *endOfWord++ ); // удаление слова
-				
+				endOfWord = bufferPtr; // remember the end of the word
+				bufferPtr = startOfWord; // set the buffer pointer on the beginning of the word
+				while ( *bufferPtr++ = *endOfWord++ ); // word deletion
+
+				bufferPtr = startOfWord - 1;
 				found = NO;
 			}
 			else 
-			{
-				if ( *bufferPtr == ',' ) 
-					found = YES;
-			}
+				found = ( *bufferPtr == ' ' && found || *bufferPtr == ',' ) ? YES : NO; // allow spaces after the comma
 			
 			flag = NO;
 		}
 		else 
 		{
-			if ( !flag  && found )
+			if ( !flag  && found ) // write the beginning of the word
 			{
 				startOfWord = bufferPtr;
 				found = DELETE;
@@ -62,6 +52,9 @@ void processLine( char buffer[] )
 			
 			flag = YES;
 		}
-		bufferPtr++;
-	} while ( *bufferPtr != '\0' );
+	} while ( *bufferPtr );
+	
+	puts(line);
+	getchar();
+	return 0;
 }
