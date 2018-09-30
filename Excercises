@@ -1,3 +1,4 @@
+// string length comparison
 #include <stdio.h>
 
 #define gets(a) fgets(a, sizeof(a), stdin)
