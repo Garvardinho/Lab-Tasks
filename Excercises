@@ -1,0 +1,24 @@
+#include <stdio.h>
+
+#define gets(a) fgets(a, sizeof(a), stdin)
+
+int main()
+{
+	char arr1[100];
+	char arr2[100];
+	char *str1, *str2;
+	int a = 0;
+
+	gets(arr1);
+	str1 = arr1;
+	gets(arr2);
+	str2 = arr2;
+
+	while ( *++str1 && *++str2 );
+
+	a = *str1 ? 1 : -1;
+	if (*(str1-1) == *str2) a = 0; // taking the str1 - 1 position due to Line Feed symbol in the str1 string
+
+	printf("%d", a);
+	getchar();
+}
