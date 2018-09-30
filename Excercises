@@ -15,11 +15,12 @@ int main()
 	gets(arr2);
 	str2 = arr2;
 
-	while ( *++str1 && *++str2 );
+	for (; *str1 && *str2; str1++, str2++);
 
 	a = *str1 ? 1 : -1;
-	if (*(str1-1) == *str2) a = 0; // taking the str1 - 1 position due to Line Feed symbol in the str1 string
+	if (*str1 == *str2) a = 0;
 
 	printf("%d", a);
 	getchar();
+	return 0;
 }
