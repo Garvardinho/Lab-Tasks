@@ -1,0 +1,18 @@
+#include <stdio.h>
+
+#define gets(a) fgets(a, sizeof(a), stdin)
+
+int main()
+{
+	char arr1[100];
+	char *str1;
+
+	gets(arr1);
+
+	for(str1 = arr1; *str1; str1++)
+		*str1 = (*str1 == 'a') ? '9' : *str1;
+
+	puts(arr1);
+	getchar();
+	return 0;
+}
