@@ -14,7 +14,11 @@ int main()
 	{
 		if( gets(arr2) )
 			fputs(arr2, myFile);
-
+		else
+		{
+			fputs(arr1, myFile);
+			break;
+		}
 		fputs(arr1, myFile);
 	}
 	fclose(myFile);
