@@ -1,0 +1,23 @@
+#include <stdio.h>
+
+#define gets(a) fgets(a, sizeof(a), stdin)
+
+int main()
+{
+	char arr1[100];
+	char *str1;
+	char swap;
+
+	gets(arr1);
+
+	for(str1 = arr1; *str1 && *(str1 + 1); str1 += 2)
+	{
+		swap = *(str1 + 1);
+		*(str1 + 1) = *str1;
+		*str1 = swap;
+	}
+
+	puts(arr1);
+	getchar();
+	return 0;
+}
