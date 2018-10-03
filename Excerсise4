@@ -1,0 +1,30 @@
+#include <stdio.h>
+
+#define gets(a) fgets(a, sizeof(a), stdin)
+
+int main()
+{
+	char arr[100];
+	char string[50] = "A72";
+	char *str;
+	char *cpy;
+	int length, i;
+
+	gets(arr);
+	str = arr;
+	cpy = string + 3;
+
+	for( length = 0; *str; length++, str++ );
+	for( i = length / 2; i >= 0; i--, str-- );
+	for( ; *str; str++, cpy++ )
+		*cpy = *str;
+	for( i = length / 2; i >=
+		0; i--, str-- );
+	for( cpy = string; *cpy; cpy++, str++ )
+		*str = *cpy;
+	*str = '\0';
+
+	puts(arr);
+	getchar();
+	return 0;
+}
