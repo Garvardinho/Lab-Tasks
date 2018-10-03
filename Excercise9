@@ -1,0 +1,19 @@
+#include <stdio.h>
+
+#define gets(a) fgets(a, sizeof(a), stdin)
+
+int main()
+{
+	int a;
+	
+	FILE *myFile;
+	myFile = fopen("Файл.txt", "w");
+
+	while ( scanf("%d", &a) )
+	{
+		a = (a > 0) ? a : 0;
+		fprintf(myFile, "%d\n", a);
+	}
+	fclose(myFile);
+	return 0;
+}
