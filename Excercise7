@@ -1,0 +1,20 @@
+#include <stdio.h>
+
+#define gets(a) fgets(a, sizeof(a), stdin)
+
+int main()
+{
+	char arr1[100];
+	char *str1;
+	char swap;
+	int a;
+
+	gets(arr1);
+
+	for(a = 0, str1 = arr1; *str1; str1++)
+		a = (*str1 == 'b' && *(str1 + 1) == 'c') ? (a + 1) : a;
+
+	printf("%d", a);
+	getchar();
+	return 0;
+}
