@@ -1,0 +1,22 @@
+#include <stdio.h>
+
+#define gets(a) fgets(a, sizeof(a), stdin)
+
+int main()
+{
+	char arr1[100];
+	char arr2[100];
+	
+	FILE *myFile;
+	myFile = fopen("Файл.txt", "w");
+
+	while ( gets(arr1) )
+	{
+		if( gets(arr2) )
+			fputs(arr2, myFile);
+
+		fputs(arr1, myFile);
+	}
+	fclose(myFile);
+	return 0;
+}
