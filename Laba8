@@ -26,25 +26,25 @@ int main(void)
 	{
 		bufferPtr++;
 		if ( *bufferPtr == ' ' || *bufferPtr == ',' || *bufferPtr == '.' 
-		 || *bufferPtr == '\n' || *bufferPtr == '\0' ) // check for separator
+		 || *bufferPtr == '\n' || *bufferPtr == '\0' || ( *bufferPtr >= '0' && *bufferPtr <= '9' ) )
 		{
 			if ( found == DELETE )
 			{
-				endOfWord = bufferPtr; // remember the end of the word
-				bufferPtr = startOfWord; // set the buffer pointer on the beginning of the word
+				endOfWord = bufferPtr;
+				bufferPtr = startOfWord;
 				while ( *bufferPtr++ = *endOfWord++ ); // word deletion
 
 				bufferPtr = startOfWord - 1;
 				found = NO;
 			}
 			else 
-				found = ( *bufferPtr == ' ' && found || *bufferPtr == ',' ) ? YES : NO; // allow spaces after the comma
+				found = ( *bufferPtr == ' ' && found || *bufferPtr == ',' ) ? YES : NO;
 			
 			flag = NO;
 		}
 		else 
 		{
-			if ( !flag  && found ) // write the beginning of the word
+			if ( !flag  && found )
 			{
 				startOfWord = bufferPtr;
 				found = DELETE;
