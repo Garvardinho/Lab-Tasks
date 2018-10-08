@@ -30,8 +30,11 @@ int main()
 		if( ptr == NULL )
 			break;
 
-		while( *ptr )
+		ptr--;
+		do
 		{
+			ptr++;
+
 			if( *ptr >= '0' && *ptr <= '9' )
 			{
 				if( !flag )
@@ -49,9 +52,8 @@ int main()
 					flag = NO;
 				}
 			}
+		} while( *ptr );
 
-			ptr++;
-		}
 		fputs(line, fpout);
 	}
 	fcloseall();
