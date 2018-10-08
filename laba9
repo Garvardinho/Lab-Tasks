@@ -1,0 +1,59 @@
+#include <stdio.h>
+
+#define NO 0
+#define YES 1
+
+int main() 
+{
+	FILE *fpin;
+	FILE *fpout;
+	char line[1000];
+	char *ptr;
+	char *del;
+	char *start;
+	int flag = NO;
+
+	fpin = fopen( "test.txt", "r" );
+	if( !fpin )
+		return;
+
+	fpout = fopen( "result.txt", "w" );
+	if( !fpout )
+		return;
+
+	while( !feof(fpin) )
+	{
+		ptr = fgets( line, 1000, fpin );
+		start = ptr;
+		del = ptr;
+
+		if( ptr == NULL )
+			break;
+
+		while( *ptr )
+		{
+			if( *ptr >= '0' && *ptr <= '9' )
+			{
+				if( !flag )
+					start = ptr;
+
+				flag = YES;
+			}
+			else
+			{
+				if( flag )
+				{
+					del = start;
+					while( *del++ = *ptr++ );
+					ptr = start;
+					flag = NO;
+				}
+			}
+
+			ptr++;
+		}
+		fputs(line, fpout);
+	}
+	fcloseall();
+	return 0;
+}
