@@ -8,7 +8,7 @@ int main(void)
 {
 	char line[1000];
 
-	fgets(line, sizeof line, stdin); // use 'fgets' instead of 'gets'
+	fgets(line, sizeof line, stdin);
 
 	char *bufferPtr;
 	char *startOfWord;
@@ -18,7 +18,7 @@ int main(void)
 
 	flag = NO;
 	found = NO;
-	bufferPtr = line - 1; // set this value because of the increment in the beginning of the cycle
+	bufferPtr = line - 1;
 	startOfWord = bufferPtr;
 	endOfWord = bufferPtr;
 	
