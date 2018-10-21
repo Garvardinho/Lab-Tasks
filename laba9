@@ -27,7 +27,7 @@ int main()
 		del = ptr;
 
 		ptr--;
-		do
+		while( *ptr )
 		{
 			ptr++;
 
@@ -49,7 +49,7 @@ int main()
 				}
 				flag = NO;
 			}
-		} while( *ptr );
+		}
 
 		fputs(line, fpout);
 	}
