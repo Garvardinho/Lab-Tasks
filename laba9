@@ -13,22 +13,18 @@ int main()
 	char *start;
 	int flag = NO;
 
-	fpin = fopen( "test.txt", "r" );
+	fpin = fopen( "test.txt", "rt" );
 	if( !fpin )
-		return;
+		return 1;
 
-	fpout = fopen( "result.txt", "w" );
+	fpout = fopen( "result.txt", "wt" );
 	if( !fpout )
-		return;
+		return 1;
 
-	while( !feof(fpin) )
+	while( ptr = fgets( line, 1000, fpin ) )
 	{
-		ptr = fgets( line, 1000, fpin );
 		start = ptr;
 		del = ptr;
-
-		if( ptr == NULL )
-			break;
 
 		ptr--;
 		do
@@ -40,17 +36,18 @@ int main()
 				if( !flag )
 					start = ptr;
 
-				flag = YES;
+				if( *(start - 1) == ' ' || start == line )
+					flag = YES;
 			}
 			else
 			{
-				if( flag )
+				if( ( *ptr == ' ' || *ptr == '\0' ) && flag )
 				{
 					del = start;
 					while( *del++ = *ptr++ );
 					ptr = start;
-					flag = NO;
 				}
+				flag = NO;
 			}
 		} while( *ptr );
 
