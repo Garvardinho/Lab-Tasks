@@ -5,54 +5,55 @@
 
 int main() 
 {
-	FILE *fpin;
-	FILE *fpout;
-	char line[1000];
-	char *ptr;
-	char *del;
-	char *start;
-	int flag = NO;
+  FILE *fpin;
+  FILE *fpout;
+  char line[1000];
+  char *ptr;
+  char *del;
+  char *start;
+  int flag = NO;
 
-	fpin = fopen( "test.txt", "rt" );
-	if( !fpin )
-		return 1;
+  fpin = fopen( "test.txt", "rt" );
+  if( !fpin )
+    return 1;
 
-	fpout = fopen( "result.txt", "wt" );
-	if( !fpout )
-		return 1;
+  fpout = fopen( "result.txt", "wt" );
+  if( !fpout )
+    return 1;
 
-	while( ptr = fgets( line, 1000, fpin ) )
-	{
-		start = ptr;
-		del = ptr;
+  while( ptr = fgets( line, 1000, fpin ) )
+  {
+    start = ptr;
+    del = ptr;
 
-		ptr--;
-		while( *ptr )
-		{
-			ptr++;
+    while( *(ptr - 1) )
+    {
+      if( *ptr >= '0' && *ptr <= '9' )
+      {
+        if( !flag )
+          start = ptr;
 
-			if( *ptr >= '0' && *ptr <= '9' )
-			{
-				if( !flag )
-					start = ptr;
+        if( *(ptr - 1) == ' ' || *(ptr - 1) == '\t' || ptr == line )
+          flag = YES;
+      }
+      else
+      {
+        if( ( *ptr == ' ' || *ptr == '\t' || *ptr == '\n' || *ptr == '\0' ) && flag )
+        {
+          del = start;
+          while( *del++ = *ptr++ );
+          ptr = start;
+        }
+        flag = NO;
+      }
 
-				if( *(start - 1) == ' ' || start == line )
-					flag = YES;
-			}
-			else
-			{
-				if( ( *ptr == ' ' || *ptr == '\0' ) && flag )
-				{
-					del = start;
-					while( *del++ = *ptr++ );
-					ptr = start;
-				}
-				flag = NO;
-			}
-		}
+      ptr++;
+    }
 
-		fputs(line, fpout);
-	}
-	fcloseall();
-	return 0;
+    fputs( line, fpout );
+  }
+
+  fclose( fpin );
+  fclose( fpout );
+  return 0;
 }
